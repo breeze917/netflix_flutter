@@ -1,22 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/model_movie.dart';
+import 'package:flutter_app/wedget/caroucel_slider.dart';
 
-
-class HomeScreen extends StatefulWidget{
+class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>{
+class _HomeScreenState extends State<HomeScreen> {
   List<Movie> movies = [
     Movie.fromMap({
       'title': 'testTitle',
-      'keyword':'test/movie',
-      'poster': 'test_movie_1.png',
+      'keyword': 'test/movie1',
+      'poster': 'image3.jpg',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': 'testTitle',
+      'keyword': 'test/movie2',
+      'poster': 'image3.jpg',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': 'testTitle',
+      'keyword': 'test/movie3',
+      'poster': 'image3.jpg',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': 'testTitle',
+      'keyword': 'test/movie4',
+      'poster': 'image3.jpg',
       'like': false
     })
   ];
-
 
   @override
   void initState() {
@@ -25,16 +42,20 @@ class _HomeScreenState extends State<HomeScreen>{
 
   @override
   Widget build(BuildContext context) {
-//    return Container(
-//      child: Center(
-//        child: Text('homescreen')
-//      ,)
-//      ,);
-  return TopBar();
+    return ListView(
+      children: <Widget>[
+        Stack(
+          children: <Widget>[
+            CarouselImage(movie: movies),
+            TopBar(),
+          ],
+        )
+      ],
+    );
   }
 }
 
-class TopBar extends StatelessWidget{
+class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
