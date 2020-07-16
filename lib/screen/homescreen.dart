@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/model_movie.dart';
+import 'package:flutter_app/wedget/box_slider.dart';
 import 'package:flutter_app/wedget/caroucel_slider.dart';
+import 'package:flutter_app/wedget/circle_slider.dart';
 
 class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
@@ -32,7 +34,31 @@ class _HomeScreenState extends State<HomeScreen> {
       'keyword': 'test/movie4',
       'poster': 'image3.jpg',
       'like': false
-    })
+    }),
+    Movie.fromMap({
+      'title': 'testTitle',
+      'keyword': 'test/movie4',
+      'poster': 'image3.jpg',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': 'testTitle',
+      'keyword': 'test/movie4',
+      'poster': 'image3.jpg',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': 'testTitle',
+      'keyword': 'test/movie4',
+      'poster': 'image3.jpg',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': 'testTitle',
+      'keyword': 'test/movie4',
+      'poster': 'image3.jpg',
+      'like': false
+    }),
   ];
 
   @override
@@ -49,7 +75,13 @@ class _HomeScreenState extends State<HomeScreen> {
             CarouselImage(movie: movies),
             TopBar(),
           ],
-        )
+        ),
+        CircleSlider(
+          movies: movies,
+        ),
+        BoxSlider(
+          movies: movies,
+        ),
       ],
     );
   }
