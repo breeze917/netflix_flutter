@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/model/model_movie.dart';
+import 'package:flutter_app/screen/detail_screen.dart';
 
 class CarouselImage extends StatefulWidget {
   final List<Movie> movie;
@@ -14,7 +15,7 @@ class _CarouselImageState extends State<CarouselImage> {
   List<Widget> images;
   List<String> keyword;
   List<bool> likes;
-  int _currenPage = 0;
+  int _currentPage = 0;
   String _currentKeyword;
 
   @override
@@ -42,8 +43,8 @@ class _CarouselImageState extends State<CarouselImage> {
             options: CarouselOptions(
               onPageChanged: (index, reason) {
                 setState(() {
-                  _currenPage = index;
-                  _currentKeyword = keyword[_currenPage];
+                  _currentPage = index;
+                  _currentKeyword = keyword[_currentPage];
                 });
               },
             ),
@@ -62,7 +63,7 @@ class _CarouselImageState extends State<CarouselImage> {
                 Container(
                   child: Column(
                     children: <Widget>[
-                      likes[_currenPage]
+                      likes[_currentPage]
                           ? IconButton(
                               icon: Icon(Icons.check),
                               onPressed: () {},
@@ -104,7 +105,15 @@ class _CarouselImageState extends State<CarouselImage> {
                     children: <Widget>[
                       IconButton(
                         icon: Icon(Icons.info),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute<Null>(
+                              fullscreenDialog: true,
+                              builder: (BuildContext context) {
+                                return DetailScreen(
+                                  movie: movies[_currentPage],
+                                );
+                              }));
+                        },
                       ),
                       Text(
                         '정보',
@@ -119,7 +128,7 @@ class _CarouselImageState extends State<CarouselImage> {
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: makeIndicator(likes, _currenPage),
+              children: makeIndicator(likes, _currentPage),
             ),
           )
         ],
