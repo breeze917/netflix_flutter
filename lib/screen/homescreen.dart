@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/model_movie.dart';
@@ -10,64 +11,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Movie> movies = [
-    Movie.fromMap({
-      'title': 'testTitle',
-      'keyword': 'test/movie1',
-      'poster': 'image3.jpg',
-      'like': false
-    }),
-    Movie.fromMap({
-      'title': 'testTitle',
-      'keyword': 'test/movie2',
-      'poster': 'image3.jpg',
-      'like': false
-    }),
-    Movie.fromMap({
-      'title': 'testTitle',
-      'keyword': 'test/movie3',
-      'poster': 'image3.jpg',
-      'like': false
-    }),
-    Movie.fromMap({
-      'title': 'testTitle',
-      'keyword': 'test/movie4',
-      'poster': 'image3.jpg',
-      'like': false
-    }),
-    Movie.fromMap({
-      'title': 'testTitle',
-      'keyword': 'test/movie4',
-      'poster': 'image3.jpg',
-      'like': false
-    }),
-    Movie.fromMap({
-      'title': 'testTitle',
-      'keyword': 'test/movie4',
-      'poster': 'image3.jpg',
-      'like': false
-    }),
-    Movie.fromMap({
-      'title': 'testTitle',
-      'keyword': 'test/movie4',
-      'poster': 'image3.jpg',
-      'like': false
-    }),
-    Movie.fromMap({
-      'title': 'testTitle',
-      'keyword': 'test/movie4',
-      'poster': 'image3.jpg',
-      'like': false
-    }),
-  ];
+  Firestore firestore = Firestore.instance;
+  Stream<QuerySnapshot> streamDate;
 
   @override
   void initState() {
     super.initState();
+    streamDate = firestore.collection('movie').snapshots();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _fecthData(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('movie').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+        return _buildBody(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget _buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Movie> movies = snapshot.map((e) => Movie.fromSnapshot(e)).toList();
     return ListView(
       children: <Widget>[
         Stack(
@@ -84,6 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _fecthData(context);
   }
 }
 

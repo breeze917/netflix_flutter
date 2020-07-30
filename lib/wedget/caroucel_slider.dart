@@ -22,8 +22,7 @@ class _CarouselImageState extends State<CarouselImage> {
   void initState() {
     super.initState();
     this.movies = widget.movie;
-    this.images =
-        this.movies.map((e) => Image.asset('./images/' + e.poster)).toList();
+    this.images = this.movies.map((e) => Image.network(e.poster)).toList();
     this.keyword = this.movies.map((e) => e.keyword).toList();
     this.likes = this.movies.map((e) => e.like).toList();
 
@@ -38,15 +37,26 @@ class _CarouselImageState extends State<CarouselImage> {
           Container(
             padding: EdgeInsets.all(20),
           ),
-          CarouselSlider(
-            items: images,
-            options: CarouselOptions(
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentPage = index;
-                  _currentKeyword = keyword[_currentPage];
-                });
-              },
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute<Null>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) {
+                    return DetailScreen(
+                      movie: movies[_currentPage],
+                    );
+                  }));
+            },
+            child: CarouselSlider(
+              items: images,
+              options: CarouselOptions(
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentPage = index;
+                    _currentKeyword = keyword[_currentPage];
+                  });
+                },
+              ),
             ),
           ),
           Container(
