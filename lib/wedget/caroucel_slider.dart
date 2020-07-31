@@ -76,11 +76,23 @@ class _CarouselImageState extends State<CarouselImage> {
                       likes[_currentPage]
                           ? IconButton(
                               icon: Icon(Icons.check),
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  likes[_currentPage] = !likes[_currentPage];
+                                  movies[_currentPage].reference.updateData(
+                                      {'like': likes[_currentPage]});
+                                });
+                              },
                             )
                           : IconButton(
                               icon: Icon(Icons.add),
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  likes[_currentPage] = !likes[_currentPage];
+                                  movies[_currentPage].reference.updateData(
+                                      {'like': likes[_currentPage]});
+                                });
+                              },
                             ),
                       Text(
                         '내가 찜한 컨텐츠',
