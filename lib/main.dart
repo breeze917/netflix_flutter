@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screen/homescreen.dart';
 import 'package:flutter_app/screen/more_screen.dart';
+import 'package:flutter_app/screen/search_screen.dart';
 import 'package:flutter_app/wedget/bottom_bar.dart';
 
 void main() {
@@ -30,11 +31,12 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   HomeScreen(),
 //            Container(child: Center(child: Text('home'),),),
-                  Container(
-                    child: Center(
-                      child: Text('search'),
-                    ),
-                  ),
+                  // Container(
+                  //   child: Center(
+                  //     child: Text('search'),
+                  //   ),
+                  // ),
+                  SearchScreen(),
                   Container(
                     child: Center(
                       child: Text('save'),
