@@ -68,13 +68,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 Container(
                                     padding: EdgeInsets.all(3),
                                     child: FlatButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          like = !like;
-                                          widget.movie.reference
-                                              .updateData({'like': like});
-                                        });
-                                      },
+                                      onPressed: () {},
                                       color: Colors.red,
                                       child: Row(
                                         mainAxisAlignment:
