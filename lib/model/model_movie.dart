@@ -16,6 +16,10 @@ class Movie {
   Movie.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
 
+  bool isLike() {
+    return like;
+  }
+
   @override
   String toString() {
     return "Movie<$title:$keyword>";
